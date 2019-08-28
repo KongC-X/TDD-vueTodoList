@@ -1,6 +1,9 @@
 <template>
     <div>
-      <Header/>
+      <Header @add="addUndoItem"/>
+      <ul>
+        <li v-for="(item , index) in undoList" :key="index">{{item}}</li>
+      </ul>
     </div>
 </template>
 
@@ -10,6 +13,16 @@ export default {
   name: 'TodoList',
   components: {
     Header
+  },
+  data () {
+    return {
+      undoList: []
+    }
+  },
+  methods: {
+    addUndoItem (inputValue) {
+      this.undoList.push(inputValue)
+    }
   }
 }
 </script>

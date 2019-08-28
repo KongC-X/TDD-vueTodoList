@@ -1,6 +1,11 @@
 import { shallowMount } from '@vue/test-utils'
 import Header from '../../components/Header'
 
+it('Headerのstyle変化時にお知らせ', () => {
+  const wrapper = shallowMount(Header)
+  expect(wrapper).toMatchSnapshot()
+})
+
 it('Header内にinput存在します', () => {
   const wrapper = shallowMount(Header)
   const input = wrapper.find('[data-test="input"]')
