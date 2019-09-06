@@ -12,7 +12,7 @@
           @click="() => changeStatus(index)"
         >
           <input
-            class="input"
+            class="inputs"
             v-if="item.status === 'input'"
             data-test="input"
             :value="item.value"
@@ -107,7 +107,7 @@ export default {
   text-indent 0px
   cursor pointer
 }
-.input {
+.inputs {
   width 460px
   height 24px
   text-indent 10px
