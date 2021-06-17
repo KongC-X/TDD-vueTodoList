@@ -1,23 +1,22 @@
 <template>
     <div>
-      <Header @add="addUndoItem"/>
-      <UndoList
+      <todo-header @add="addUndoItem"></todo-header>
+      <undo-list
         :list="undoList"
-                @delete="handleItemDelete"
-                @status="changeStatus"
-                @reset="resetStatus"
-                @change="changeItemValue"
-      />
-    </div>
+        @delete="handleDeleteItem"
+        @status="changeStatus"
+        @reset="resetStatus"
+    ></undo-list>
+  </div>
 </template>
 
 <script>
-import Header from './components/Header'
+import TodoHeader from './components/Header'
 import UndoList from './components/UndoList'
 export default {
   name: 'TodoList',
   components: {
-    Header,
+    TodoHeader,
     UndoList
   },
   data () {
@@ -32,29 +31,17 @@ export default {
         value: inputValue
       })
     },
-    handleItemDelete (index) {
+    handleDeleteItem (index) {
       this.undoList.splice(index, 1)
     },
     changeStatus (index) {
-      const newList = []
-      this.undoList.forEach((item, itemIndex) => {
-        if (itemIndex === index) {
-          newList.push({ status: 'input', value: item.value })
-        } else {
-          newList.push({ status: 'div', value: item.value })
-        }
-      })
-      this.undoList = newList
+      this.undoList = this.undoList.map((item, idx) => ({ value: item.value, status: idx === index ? 'input' : 'div' }))
     },
     resetStatus () {
-      const newList = []
-      this.undoList.forEach((item) => {
-        newList.push({ status: 'div', value: item.value })
-      })
-      this.undoList = newList
+      this.undoList = this.undoList.map(item => ({ value: item.value, status: 'div' }))
     },
-    changeItemValue (obj) {
-      this.undoList[obj.index].value = obj.value
+    changeItemValue ({ index, value }) {
+      this.undoList[index].value = value
     }
   }
 }

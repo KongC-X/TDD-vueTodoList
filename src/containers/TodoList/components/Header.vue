@@ -7,7 +7,7 @@
           data-test="input"
           v-model="inputValue"
           @keyup.enter="addTodoItem"
-          placeholder="TodoItem"
+          placeholder="Add TodoItem"
         />
       </div>
     </div>
@@ -41,15 +41,17 @@ export default {
   width 600px
   margin 0 auto
   color #ffffff
-  font-size 24px
+  font-size 28px
 }
 .header-input{
   float right
   width 360px
   margin-top 16px
   line-height 24px
+  border-radius 5px
   outline none
   color #333
+  text-indent: 2em
   text-indent 10px
 }
 </style>

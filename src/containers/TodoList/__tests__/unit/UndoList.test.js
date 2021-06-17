@@ -3,7 +3,7 @@ import UndoList from '../../components/UndoList'
 import { findTestWrapper } from '../../../../utils/testUtils'
 
 describe('UndoList', () => {
-  it('パラメータは[], countは0,list内容無し', () => {
+  it('参数为[]，count为0，无list内容', () => {
     const wrapper = shallowMount(UndoList, {
       propsData: { list: [] }
     })
@@ -12,7 +12,7 @@ describe('UndoList', () => {
     expect(countElem.at(0).text()).toEqual('0')
     expect(listItems.length).toEqual(0)
   })
-  it('パラメータが[1,2,3],count=3,list内容あり, 削除ポタんが存在する', () => {
+  it('参数为[1,2,3]，count=3，有list内容，存在删除按钮', () => {
     const wrapper = shallowMount(UndoList, {
       propsData: { list: [
         { status: 'div', value: 1 },
@@ -26,7 +26,7 @@ describe('UndoList', () => {
     expect(listItems.length).toEqual(3)
     expect(deleteButtons.length).toEqual(3)
   })
-  it('削除ボタンクリックされたら、削除メソッド実行する', () => {
+  it('点击删除按钮后，执行删除方法', () => {
     const wrapper = shallowMount(UndoList, {
       propsData: { list: [
         { status: 'div', value: 1 },
@@ -36,10 +36,10 @@ describe('UndoList', () => {
     const deleteButton = findTestWrapper(wrapper, 'delete-button').at(1)
     deleteButton.trigger('click')
     expect(wrapper.emitted().delete).toBeTruthy()
-    // click事件が何回起きた == 1
+    // click事件发生次数 == 1
     expect(wrapper.emitted().delete[0][0]).toBe(1)
   })
-  it('list-itemがクリックされたら、外部に status イベントを送る', () => {
+  it('listitem被点击后，向外部发送status事件', () => {
     const wrapper = shallowMount(UndoList, {
       propsData: { list: [
         { status: 'div', value: 1 },
@@ -52,7 +52,7 @@ describe('UndoList', () => {
     expect(wrapper.emitted().status).toBeTruthy()
     expect(wrapper.emitted().status[0][0]).toBe(1)
   })
-  it('リスト一つがinput, 二つが一般内容', () => {
+  it('一个列表是input，另外两个是一般内容', () => {
     const wrapper = shallowMount(UndoList, {
       propsData: { list: [
         { status: 'div', value: 1 },
@@ -64,7 +64,7 @@ describe('UndoList', () => {
     expect(input.at(0).element.value).toBe('2')
     expect(input.length).toBe(1)
   })
-  it('inputの焦点失ったら、外部にresetイベントを出す', () => {
+  it('input失去焦点后，向外部发出reset事件', () => {
     const wrapper = shallowMount(UndoList, {
       propsData: { list: [
         { status: 'div', value: 1 },
@@ -76,7 +76,7 @@ describe('UndoList', () => {
     inputElem.trigger('blur')
     expect(wrapper.emitted().reset).toBeTruthy()
   })
-  it('input変化時に、changeイベントを発動', () => {
+  it('input变化时，启动change事件', () => {
     const wrapper = shallowMount(UndoList, {
       propsData: { list: [
         { status: 'div', value: 1 },

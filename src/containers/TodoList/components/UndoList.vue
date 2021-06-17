@@ -1,7 +1,7 @@
 <template>
     <div class="undolist">
       <div class="title">
-        進行中
+        正在进行
         <span data-test="count" class="count">{{ list.length }}</span>
       </div>
       <ul class="list">
